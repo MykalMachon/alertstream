@@ -1,6 +1,6 @@
 # AlertStream
 
-a simple http alerting and log aggregation tool. There are two core functions here. 
+A simple http API and admin for log aggregation and alerting.
 
 ## Components
 
