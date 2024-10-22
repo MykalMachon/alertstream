@@ -8,4 +8,4 @@ redis.conf
 *.rdb
 appendonlydir/
 
-# APP IGNORES
+# ALERTSTREAM IGNORES
