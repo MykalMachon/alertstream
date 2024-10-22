@@ -1,0 +1,11 @@
+# REDIS IGNORES
+
+# - Config
+redis.conf 
+
+# - Database Files
+*.aof
+*.rdb
+appendonlydir/
+
+# APP IGNORES
