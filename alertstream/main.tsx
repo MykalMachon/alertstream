@@ -17,6 +17,9 @@ app.get('/', (c) => c.html(<HomePageView />))
 app.get('/login', (c) => c.html(<Layout>
   <h1>Login</h1>
 </Layout>))
+app.get('/logout', (c) => c.html(<Layout>
+  <h1>You've been logged out...</h1>
+</Layout>))
 
 app.get('/channels', (c) => c.html(<Layout>
   <h1>Channels</h1>
