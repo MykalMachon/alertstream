@@ -1,11 +1,3 @@
-# REDIS IGNORES
-
-# - Config
-redis.conf 
-
-# - Database Files
-*.aof
-*.rdb
-appendonlydir/
-
 # ALERTSTREAM IGNORES
+alertstream/_data/*
+!alertstream/_data/.gitkeep

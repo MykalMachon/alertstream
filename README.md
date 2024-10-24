@@ -4,9 +4,9 @@ A simple http API and admin for log aggregation and alerting.
 
 ## Components
 
-- HTTP API: API to send error logs to 
+- HTTP API: API to do all the things.
 - Web Admin: simple app to create channels + notification systems, manage roles, and API keys.
-- Redis: persistent log store database
+- LibSQL: libSQL database for logs and information.
 
 ## But why?
 

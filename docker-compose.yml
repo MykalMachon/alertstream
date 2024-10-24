@@ -6,6 +6,8 @@ services:
       dockerfile: .
     container_name: alertstream 
     restart: unless-stopped
+    volumes: 
+      - ./alertstream/data:/app/data
     ports: 
     - 8080:8080
   
