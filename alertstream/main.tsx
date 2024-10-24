@@ -10,6 +10,11 @@ import eventApi from "./api/events.ts";
 import channelApi from "./api/channels.ts";
 import settingsApi from "./api/settings.ts";
 
+// DATABASE SETUP 
+import db, { initDatabase } from './database.ts'
+
+initDatabase(db);
+
 const app = new Hono()
 
 // REACT APP

@@ -1,3 +1,8 @@
 # ALERTSTREAM IGNORES
+
+# databases
 alertstream/_data/*
 !alertstream/_data/.gitkeep
+
+# secrets
+.env
