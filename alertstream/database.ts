@@ -1,5 +1,5 @@
 import { Database } from "jsr:@db/sqlite";
-import { hashPassword } from "./auth.ts";
+import { hashPassword } from "./utils/auth.ts";
 
 const db = new Database("_data/alertstream.db");
 

@@ -1,10 +1,11 @@
-import { Hono } from 'hono'
+import { Hono, type Context } from 'hono'
 import { setCookie, getCookie, deleteCookie } from 'hono/cookie'
 
 import { encode, decode } from "@gz/jwt";
 
 import db from "../database.ts";
-import { comparePasswordToHash, hashPassword } from "../auth.ts";
+import { apiAuthentication } from "../middlewares.ts";
+import { comparePasswordToHash } from "../utils/auth.ts";
 
 // TODO: LOOK AT THIS MIDDLEWARE
 // https://hono.dev/docs/middleware/builtin/jwt
@@ -59,7 +60,7 @@ authApi.post('/login', async (c) => {
   }
 })
 
-authApi.post('/logout', (c) => {
+authApi.get('/logout', (c) => {
   deleteCookie(c, 'auth_token')
   return c.json({
     "message": "cookie removed; you're logged out son!"
@@ -67,25 +68,11 @@ authApi.post('/logout', (c) => {
 })
 
 // User info
-authApi.get('/me', async (c) => {
-  // returns user info
-  const authHeader = c.req.header('Authorization')
-  const cookie = getCookie(c, 'auth_token');
-  let token: string | null = null;
-
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    token = authHeader.substring(7);
-  } else if (cookie) {
-    token = cookie;
-  }
-
-  if (!token) {
-    return c.json({ message: 'Unauthorized' }, 401);
-  }
-
+authApi.use('/me', apiAuthentication)
+authApi.get('/me', (c: Context) => {
   try {
-    const decoded = await decode(token, Deno.env.get('JWT_SECRET')!);
-    return c.json(decoded, 200);
+    const user = c.get('auth_user');
+    return c.json(user, 200);
   } catch (error) {
     console.error(error)
     return c.json({ message: 'Invalid token' }, 401);
@@ -93,6 +80,7 @@ authApi.get('/me', async (c) => {
 })
 
 // API Keys
+authApi.use('/apikey', apiAuthentication)
 authApi.post('/apikey', async (c) => {
   // check if the user is authenticated
   const authHeader = c.req.header('Authorization')
@@ -127,8 +115,6 @@ authApi.post('/apikey', async (c) => {
   // return the API key to the user
   return c.json({ api_key: apiKey }, 201);
 })
-
-
 authApi.delete('/apikey/', (c) => c.json({ message: 'stub' }))
 
 export default authApi;
