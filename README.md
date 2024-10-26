@@ -5,8 +5,7 @@ A simple http API and admin for log aggregation and alerting.
 ## Components
 
 - HTTP API: API to do all the things.
-- Web Admin: simple app to create channels + notification systems, manage roles, and API keys.
-- LibSQL: libSQL database for logs and information.
+- Web App: simple app to create channels + notification systems, manage roles, and API keys.
 
 ## But why?
 

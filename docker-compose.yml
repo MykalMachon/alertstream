@@ -1,23 +1,21 @@
 services:
   
-  alertstream: 
+  api: 
+    build:
+      context: ./api
+      dockerfile: .
+    container_name: alertstream_api
+    restart: unless-stopped
+    volumes: 
+      - ./api/_data:/app/_data
+    ports: 
+    - 8080:8080
+
+  app: 
     build:
       context: ./app
       dockerfile: .
-    container_name: alertstream 
+    container_name: alertstream_app
     restart: unless-stopped
-    volumes: 
-      - ./alertstream/data:/app/data
     ports: 
-    - 8080:8080
-  
-  redis: 
-    image: redis:7-alpine
-    container_name: redis
-    restart: unless-stopped
-    command: redis-server /var/redis/conf/redis.conf
-    volumes:
-      - ./redis/conf:/var/redis/conf
-      - ./redis/data:/data
-    ports: 
-      - 6379:6379
+    - 8081:8081
