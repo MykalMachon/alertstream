@@ -1,4 +1,4 @@
-import { Hono } from 'hono'
+import { Hono, type Context } from 'hono'
 import db from '../database.ts';
 import { apiAuthentication } from '../middlewares.ts';
 
@@ -25,15 +25,16 @@ channelApi.get('/:channel_id', (c) => {
   return c.json({ channel }, 200);
 });
 
-channelApi.post('/create', async (c) => {
+channelApi.post('/create', async (c: Context) => {
   const data = await c.req.json();
+  const user = await c.get('auth_user');
 
   if (!data.name) {
     return c.json({ message: 'Channel name is required' }, 400);
   }
 
-  const insertStmt = db.prepare('INSERT INTO channels (name, description) VALUES (?, ?)');
-  insertStmt.run(data.name, data.description);
+  const insertStmt = db.prepare('INSERT INTO channels (name, description, created_by) VALUES (?, ?, ?)');
+  insertStmt.run(data.name, data.description, user.id);
 
   return c.json(data, 200);
 });
@@ -56,7 +57,7 @@ channelApi.put('/:channel_id', async (c) => {
   return c.json(data, 200);
 });
 
-channelApi.delete('/:channel_id', async (c) => {
+channelApi.delete('/:channel_id', (c) => {
   const channel_id = c.req.param('channel_id');
 
   if (!channel_id) {

@@ -17,10 +17,11 @@ export const initDatabase = (db: Database) => {
   // TODO: some sort of migration situation needs to happen...
   db.exec(`
   CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    role TEXT DEFAULT 'user',
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    username  TEXT NOT NULL UNIQUE,
+    password  TEXT NOT NULL,
+    role      TEXT DEFAULT 'user',
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )
   `);
@@ -28,10 +29,17 @@ export const initDatabase = (db: Database) => {
   // setup a channels table for the events to sit in
   db.exec(`
   CREATE TABLE IF NOT EXISTS channels (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL UNIQUE,
-    description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id                       INTEGER PRIMARY KEY AUTOINCREMENT,
+    name                     TEXT NOT NULL UNIQUE,
+    description              TEXT,
+    relay_enabled            BOOLEAN DEFAULT FALSE,
+    relay_threshold          INTEGER DEFAULT 0,
+    relay_threshold_period   TEXT DEFAULT 'hour',
+    relay_threshold_enabled  BOOLEAN DEFAULT FALSE,
+    created_by               INTEGER NOT NULL,
+    created_at               TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (created_by) REFERENCES users(id)
   )
   `);
 
@@ -39,18 +47,21 @@ export const initDatabase = (db: Database) => {
   // each event will be tied to a channel in a many to one relationship.
   db.exec(`
   CREATE TABLE IF NOT EXISTS events (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    channel_id INTEGER NOT NULL,
-    metadata TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (channel_id) REFERENCES channels(id)
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    channel_id          INTEGER NOT NULL,
+    metadata            TEXT NOT NULL,
+    created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by_api_key  INTEGER,
+
+    FOREIGN KEY (channel_id) REFERENCES channels(id),
+    FOREIGN KEY (created_by_api_key) REFERENCES api_keys(id)
   )
   `);
 
   // setup a settings table that is a key value store with some default values
   db.exec(`
   CREATE TABLE IF NOT EXISTS settings (
-    key TEXT PRIMARY KEY,
+    key   TEXT PRIMARY KEY,
     value TEXT NOT NULL
   )
   `);
@@ -64,12 +75,27 @@ export const initDatabase = (db: Database) => {
   // create an api_keys table for storing API keys
   db.exec(`
   CREATE TABLE IF NOT EXISTS api_keys (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    api_key TEXT NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id     INTEGER NOT NULL,
+    api_key     TEXT NOT NULL UNIQUE,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (user_id) REFERENCES users(id)
   )`);
+
+  // create a table for storing relay configurations
+  db.exec(`
+  CREATE TABLE IF NOT EXISTS relays (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        TEXT NOT NULL UNIQUE,
+    type        TEXT NOT NULL,
+    config      TEXT NOT NULL,
+    is_default  BOOLEAN DEFAULT FALSE,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by  INTEGER NOT NULL,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+  )
+  `);
 
   // seed the database
   const adminUser = Deno.env.get('ADMIN_USER');
@@ -85,7 +111,7 @@ export const initDatabase = (db: Database) => {
 
   // create a default channel
   db.exec(`
-  INSERT OR IGNORE INTO channels(id, name, description) VALUES
-  (1, 'default', 'The default channel for all events')
+  INSERT OR IGNORE INTO channels(id, name, description, created_by) VALUES
+  (1, 'default', 'The default channel for all events', 1)
   `);
 }
