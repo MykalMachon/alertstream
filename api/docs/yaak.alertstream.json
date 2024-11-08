@@ -1,0 +1,532 @@
+{
+  "yaakVersion": "2024.11.5",
+  "yaakSchema": 2,
+  "timestamp": "2024-11-08T19:59:26.522691300",
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "wk_bWSQKHC3As",
+        "createdAt": "2024-10-25T04:25:48",
+        "updatedAt": "2024-10-25T04:25:48",
+        "name": "alertstream",
+        "description": "",
+        "variables": [],
+        "settingValidateCertificates": true,
+        "settingFollowRedirects": true,
+        "settingRequestTimeout": 0
+      }
+    ],
+    "environments": [
+      {
+        "model": "environment",
+        "id": "ev_rYLgEFDOiT",
+        "workspaceId": "wk_bWSQKHC3As",
+        "createdAt": "2024-10-27T00:05:31",
+        "updatedAt": "2024-10-27T22:39:34",
+        "name": "Production",
+        "variables": [
+          {
+            "enabled": true,
+            "name": "PROTO",
+            "value": "https://"
+          },
+          {
+            "enabled": true,
+            "name": "API_ROOT",
+            "value": "alertstream-api.mykal.codes"
+          },
+          {
+            "enabled": true,
+            "name": "API_VERS",
+            "value": "/api/v1"
+          },
+          {
+            "enabled": true,
+            "name": "ADMIN_USER",
+            "value": "admin"
+          },
+          {
+            "enabled": true,
+            "name": "ADMIN_PASS",
+            "value": "admin"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "model": "environment",
+        "id": "ev_tVBqRYQOKd",
+        "workspaceId": "wk_bWSQKHC3As",
+        "createdAt": "2024-10-25T04:34:28",
+        "updatedAt": "2024-10-27T22:40:09",
+        "name": "Local",
+        "variables": [
+          {
+            "enabled": true,
+            "name": "PROTO",
+            "value": "http://"
+          },
+          {
+            "enabled": true,
+            "name": "API_ROOT",
+            "value": "localhost:8000"
+          },
+          {
+            "enabled": true,
+            "name": "API_VERS",
+            "value": "/api/v1"
+          },
+          {
+            "enabled": true,
+            "name": "ADMIN_USER",
+            "value": "admin"
+          },
+          {
+            "enabled": true,
+            "name": "ADMIN_PASS",
+            "value": "admin"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": ""
+          }
+        ]
+      }
+    ],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "fl_VViDHuv4mO",
+        "createdAt": "2024-10-27T22:36:07",
+        "updatedAt": "2024-10-27T22:36:09",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": null,
+        "name": "Relays",
+        "sortPriority": 4000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_MT4bqVH2fS",
+        "createdAt": "2024-10-25T04:28:52",
+        "updatedAt": "2024-10-27T22:36:09",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": null,
+        "name": "Events",
+        "sortPriority": 3000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_NjXFoiPmuq",
+        "createdAt": "2024-10-25T04:28:41",
+        "updatedAt": "2024-10-27T22:36:09",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": null,
+        "name": "Channels",
+        "sortPriority": 2000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_nM07nPRcON",
+        "createdAt": "2024-10-25T04:28:27",
+        "updatedAt": "2024-10-27T22:36:09",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": null,
+        "name": "Settings",
+        "sortPriority": 1000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_Ezea68rsnX",
+        "createdAt": "2024-10-25T04:25:58",
+        "updatedAt": "2024-10-27T22:36:09",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": null,
+        "name": "Auth",
+        "sortPriority": 0.0
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "rq_lgXp4WGnmU",
+        "createdAt": "2024-10-26T23:20:51",
+        "updatedAt": "2024-10-27T22:42:25",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_MT4bqVH2fS",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"metadata\": {\n    \"key\": \"value\",\n    \"hello\": \"world\",\n    \"error\": \"some-error\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "enabled": true,
+            "name": "x-api-key",
+            "value": "as.9a84e413-a282-4539-a2f4-f6e047037518"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": ""
+          }
+        ],
+        "method": "GET",
+        "name": "Get Events by Channel",
+        "sortPriority": 0.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/events/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_FX2fd3Bqv1",
+        "createdAt": "2024-10-26T22:58:28",
+        "updatedAt": "2024-10-27T22:35:35",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_MT4bqVH2fS",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"channel_id\": 2,\n  \"metadata\": {\n    \"key\": \"value\",\n    \"error\": \"some-errosdwad\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "enabled": true,
+            "name": "x-api-key",
+            "value": "as.9a84e413-a282-4539-a2f4-f6e047037518"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": ""
+          }
+        ],
+        "method": "POST",
+        "name": "Create Event",
+        "sortPriority": 1000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/events/create",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_7PpSAdYizX",
+        "createdAt": "2024-10-26T22:20:28",
+        "updatedAt": "2024-10-26T23:41:56",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"api_key_id\": 3\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "DELETE",
+        "name": "Delete API Key",
+        "sortPriority": 4000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/apikey",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_hqAVMRCm4V",
+        "createdAt": "2024-10-26T22:20:10",
+        "updatedAt": "2024-10-26T22:20:21",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "POST",
+        "name": "Create API Key",
+        "sortPriority": 4000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/apikey",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_CkXomEYglj",
+        "createdAt": "2024-10-26T22:17:38",
+        "updatedAt": "2024-10-26T22:20:05",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "List API keys",
+        "sortPriority": 4000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/apikey",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_lhN6PKMHVC",
+        "createdAt": "2024-10-25T04:33:20",
+        "updatedAt": "2024-10-25T04:34:01",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_nM07nPRcON",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "Get setting by key",
+        "sortPriority": 1000.0,
+        "url": "http://localhost:8000/api/v1/settings/allowed_origins",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_e2XGKT6MUg",
+        "createdAt": "2024-10-25T04:32:54",
+        "updatedAt": "2024-10-25T04:34:19",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_nM07nPRcON",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "PUT",
+        "name": "Update setting by key",
+        "sortPriority": 2000.0,
+        "url": "http://localhost:8000/api/v1/settings/allowed_origins",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_RbZwcgGxHZ",
+        "createdAt": "2024-10-25T04:32:22",
+        "updatedAt": "2024-10-25T04:33:28",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_nM07nPRcON",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "List settings",
+        "sortPriority": 0.0,
+        "url": "http://localhost:8000/api/v1/settings/",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_ZyQ39W9rhZ",
+        "createdAt": "2024-10-25T04:31:42",
+        "updatedAt": "2024-10-27T22:42:00",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_NjXFoiPmuq",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"API Channel 2\",\n  \"description\": \"This is an API channel.\"\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "name": "Update channel by id",
+        "sortPriority": 1000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/channels/2",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_ff6rxaeEiT",
+        "createdAt": "2024-10-25T04:30:28",
+        "updatedAt": "2024-10-27T22:42:19",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_NjXFoiPmuq",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "DELETE",
+        "name": "Delete channel by id",
+        "sortPriority": 3000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/channels/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_EmwJNZCPJ8",
+        "createdAt": "2024-10-25T04:30:03",
+        "updatedAt": "2024-10-27T22:41:23",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_NjXFoiPmuq",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "Get channel by id",
+        "sortPriority": 250.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/channels/1",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_3gij93g4eH",
+        "createdAt": "2024-10-25T04:29:38",
+        "updatedAt": "2024-10-27T22:41:31",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_NjXFoiPmuq",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"API Channel 3\",\n  \"description\": \"Created via the API third time\"\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "name": "Create new channel",
+        "sortPriority": 500.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/channels/create",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_mZBj7LmhKE",
+        "createdAt": "2024-10-25T04:29:17",
+        "updatedAt": "2024-10-27T22:40:56",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_NjXFoiPmuq",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "List channels",
+        "sortPriority": 0.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/channels",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_Ioc1EIqXON",
+        "createdAt": "2024-10-25T04:26:25",
+        "updatedAt": "2024-10-26T22:20:01",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "Get User Info",
+        "sortPriority": 3000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/me",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_eMXvyAWbMn",
+        "createdAt": "2024-10-25T04:26:21",
+        "updatedAt": "2024-10-26T22:20:01",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "Logout",
+        "sortPriority": 2000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/logout",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_jf4WfeJfJ3",
+        "createdAt": "2024-10-25T04:26:19",
+        "updatedAt": "2024-10-27T22:40:31",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"username\": \"${[ ADMIN_USER ]}\",\n  \"password\": \"${[ ADMIN_PASS ]}\"\n}"
+        },
+        "bodyType": "application/json",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "name": "Login",
+        "sortPriority": 1000.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth/login",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_xtkGwU5rFf",
+        "createdAt": "2024-10-25T04:26:00",
+        "updatedAt": "2024-10-27T17:51:11",
+        "workspaceId": "wk_bWSQKHC3As",
+        "folderId": "fl_Ezea68rsnX",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "headers": [],
+        "method": "GET",
+        "name": "_root",
+        "sortPriority": 0.0,
+        "url": "${[ PROTO ]}${[ API_ROOT ]}${[ API_VERS ]}/auth",
+        "urlParameters": []
+      }
+    ],
+    "grpcRequests": []
+  }
+}
