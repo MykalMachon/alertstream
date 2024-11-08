@@ -2,6 +2,9 @@
 
 A simple http API and admin for log aggregation and alerting.
 
+This project is inspired by [LogSnag](https://logsnag.com/) and [Sanity](https://sanity.io). It aims to be a much more minimal logging and alerting system for frontend errors and metadata.
+Both Logsnag and Sanity are amazing but I need about 10% of their features for my work + would need data residency features they don't offer afaik. 
+
 ## Components
 
 - HTTP API: API to do all the things.
@@ -48,4 +51,7 @@ I don't want to pay for a massive log aggregation tool and I want to very easily
     - [ ] View Relays
     - [ ] Create Relays
     - [ ] Update Relays
-    - [ ] Delete Relays 
+    - [ ] Delete Relays
+- [ ] Other
+  - [ ] Prometheus Endpoint (allow ingest into Prometheus)
+  - [ ] Promtail Logfile (allow ingest into Loki).    
